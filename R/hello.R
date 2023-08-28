@@ -1,18 +1,21 @@
-# Hello, world!
-#
-# This is an example function named 'hello' 
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
+#' convert md into html
+#'
+#' @param file md file
+#' @importFrom rmarkdown pandoc_convert
+#' @import xml2
+#' @export
+transform2html <- function(file) {
 
-hello <- function() {
-  print("Hello, world!")
+    options <- c("-o", "_temp_pandoc.html", "-f", "markdown", "-t", "html5",
+                 "--mathjax",
+                 "--embed-resources",
+                 "--section-divs",
+                 "--wrap=none", "+RTS", "-M30m")
+    rmarkdown::pandoc_convert(file, options=options, wd = getwd())
+    tdoc <- file.path(getwd(), "_temp_pandoc.html")
+    doc <- xml2::read_html(tdoc, encoding = "utf-8")
+    seq <- xml2::xml_find_first(doc, "//section[@id='question']")
+    h <- xml2::xml_find_first(seq, "h1")
+    return(xml2::xml_text(h))
+
 }
