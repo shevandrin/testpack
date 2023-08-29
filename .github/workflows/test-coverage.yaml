@@ -15,7 +15,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: docker://pandoc/latex:2.9
+      - uses: docker://pandoc/latex:2.19
 
       - uses: actions/checkout@v3
 
