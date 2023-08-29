@@ -6,8 +6,8 @@
 #' @export
 transform2html <- function(file) {
 
-    options <- c("-o", "_temp_pandoc.html", "-f", "markdown", "-t", "html5",
-                 # "--mathjax",
+    options <- c("-o", "_temp_pandoc.html", "-f", "markdown", "-t", "html4",
+                 "--mathjax",
                  "--embed-resources",
                  "--section-divs",
                  "--wrap=none", "+RTS", "-M30m")
