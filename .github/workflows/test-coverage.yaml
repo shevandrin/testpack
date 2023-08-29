@@ -15,10 +15,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Set up Pandoc
-        uses: actions/setup-pandoc@v2
-        with:
-            pandoc-version: 2.19.2.1
+      - uses: docker://pandoc/latex:2.9
 
       - uses: actions/checkout@v3
 
