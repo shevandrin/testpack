@@ -15,7 +15,6 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: docker://pandoc/core:2.19
 
       - uses: actions/checkout@v3
 
@@ -29,6 +28,7 @@ jobs:
           needs: coverage
 
       - name: Test coverage
+        uses: docker://pandoc/core:3.0
         run: |
           covr::codecov(
             quiet = FALSE,
