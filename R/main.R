@@ -7,7 +7,7 @@
 transform2html <- function(file) {
 
     options <- c("-o", "_temp_pandoc.html", "-f", "markdown", "-t", "html5",
-                 "--mathjax",
+                 # "--mathjax",
                  "--embed-resources",
                  "--section-divs",
                  "--wrap=none", "+RTS", "-M30m")
