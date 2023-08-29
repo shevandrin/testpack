@@ -8,7 +8,9 @@ transform2html <- function(file) {
 
     options <- c("-o", "_temp_pandoc.html", "-f", "markdown", "-t", "html4",
                  "--mathjax",
-                 "--embed-resources",
+                 handle_embed(),
+                 # "--self-contained",
+                 # "--embed-resources",
                  "--section-divs",
                  "--wrap=none", "+RTS", "-M30m")
     rmarkdown::pandoc_convert(file, options=options, wd = getwd())
@@ -18,4 +20,10 @@ transform2html <- function(file) {
     h <- xml2::xml_find_first(seq, "h1")
     return(xml2::xml_text(h))
 
+}
+
+handle_embed <- function() {
+    ifelse (rmarkdown::pandoc_available("2.19"),
+            "--embed-resources",
+            "--self-contained")
 }
