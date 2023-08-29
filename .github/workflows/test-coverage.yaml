@@ -27,9 +27,12 @@ jobs:
           extra-packages: any::covr
           needs: coverage
 
+      - uses: docker://pandoc/core:2.19
+        with:
+          args: "--help"
+
       - name: Test coverage
         run: |
-          docker://pandoc/core:3.0
           covr::codecov(
             quiet = FALSE,
             clean = FALSE,
