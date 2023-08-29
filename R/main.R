@@ -14,7 +14,7 @@ transform2html <- function(file) {
     rmarkdown::pandoc_convert(file, options=options, wd = getwd())
     tdoc <- file.path(getwd(), "_temp_pandoc.html")
     doc <- xml2::read_html(tdoc, encoding = "utf-8")
-    seq <- xml2::xml_find_first(doc, "//section[@id='question']")
+    seq <- xml2::xml_find_first(doc, "//div[@id='question']")
     h <- xml2::xml_find_first(seq, "h1")
     return(xml2::xml_text(h))
 
